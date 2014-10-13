@@ -1,0 +1,45 @@
+apply plugin: 'com.github.johnrengelman.shadow'
+apply plugin: 'checkstyle'
+apply plugin: 'java'
+apply plugin: 'idea'
+
+sourceCompatibility = '1.7'
+targetCompatibility = '1.7'
+
+group = 'ru.ensemplix.bot'
+description = 'Ensemplix Minecraft Bot'
+version = '1.0'
+
+ext.buildNumber = project.hasProperty("buildNumber") ? buildNumber : 'DEV'
+compileJava.options.encoding = 'UTF-8'
+
+buildscript {
+    repositories {
+        jcenter()
+    }
+
+    dependencies {
+        classpath 'com.github.jengelman.gradle.plugins:shadow:1.1.1'
+    }
+}
+
+checkstyle {
+    configFile = file('checkstyle.xml')
+}
+
+shadowJar {
+    classifier = buildNumber
+}
+
+repositories {
+    mavenCentral()
+    jcenter()
+
+    maven {
+        url 'http://repo.spacehq.org/content/repositories/snapshots/'
+    }
+}
+
+dependencies {
+    compile 'org.spacehq:mcprotocollib:1.8-SNAPSHOT'
+}
