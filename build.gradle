@@ -41,6 +41,11 @@ dependencies {
     compile 'org.spacehq:mcprotocollib:1.8-SNAPSHOT'
 }
 
+task sourcesJar(type: Jar, dependsOn: classes) {
+    classifier = 'sources'
+    from sourceSets.main.allSource
+}
+
 publishing {
     publications {
         shadow(MavenPublication) {
