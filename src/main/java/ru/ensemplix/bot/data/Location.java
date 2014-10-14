@@ -1,4 +1,4 @@
-package ru.ensemplix.bot.attribute;
+package ru.ensemplix.bot.data;
 
 /**
  * Представляет расположение существа на карте.

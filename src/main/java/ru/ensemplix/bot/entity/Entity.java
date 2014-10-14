@@ -1,7 +1,7 @@
 package ru.ensemplix.bot.entity;
 
 import org.spacehq.mc.protocol.data.game.EntityMetadata;
-import ru.ensemplix.bot.attribute.Location;
+import ru.ensemplix.bot.data.Location;
 
 import java.util.ArrayList;
 import java.util.List;

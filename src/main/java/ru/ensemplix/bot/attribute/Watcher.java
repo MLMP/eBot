@@ -5,6 +5,7 @@ import org.spacehq.mc.protocol.packet.ingame.server.entity.spawn.ServerSpawnPlay
 import org.spacehq.packetlib.event.session.PacketReceivedEvent;
 import org.spacehq.packetlib.event.session.SessionAdapter;
 import org.spacehq.packetlib.packet.Packet;
+import ru.ensemplix.bot.data.Location;
 import ru.ensemplix.bot.entity.Entity;
 import ru.ensemplix.bot.entity.Player;
 

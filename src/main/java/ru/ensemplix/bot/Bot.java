@@ -6,8 +6,9 @@ import org.spacehq.mc.protocol.packet.ingame.client.ClientChatPacket;
 import org.spacehq.packetlib.Client;
 import org.spacehq.packetlib.Session;
 import org.spacehq.packetlib.tcp.TcpSessionFactory;
-import ru.ensemplix.bot.attribute.Watcher;
+import ru.ensemplix.bot.attribute.Chunks;
 import ru.ensemplix.bot.attribute.Move;
+import ru.ensemplix.bot.attribute.Watcher;
 
 import java.net.ConnectException;
 
@@ -32,12 +33,17 @@ public class Bot {
     /**
      * Обработчик движений бота.
      */
-    private Move move;
+    private Move move = new Move();
 
     /**
      * Обработчик существ которые находятся в зоне видимости бота.
      */
-    private Watcher watcher;
+    private Watcher watcher = new Watcher();
+
+    /**
+     * Обработчик чанков бота.
+     */
+    private Chunks chunks = new Chunks();
 
     public Bot(String name) {
         this.name = name;
@@ -57,9 +63,11 @@ public class Bot {
         }
 
         MinecraftProtocol protocol = new MinecraftProtocol(name, password, false);
-        Session session = new Client(host, port, protocol, new TcpSessionFactory()).getSession();
+        session = new Client(host, port, protocol, new TcpSessionFactory()).getSession();
 
-        session.addListener(new Move());
+        session.addListener(move);
+        session.addListener(watcher);
+        session.addListener(chunks);
         session.connect();
     }
 
