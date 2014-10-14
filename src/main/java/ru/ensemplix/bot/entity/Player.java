@@ -27,7 +27,7 @@ public class Player extends Entity {
      * Уникальный индификатор игрока.
      */
     public UUID getPlayerId() {
-       return playerId;
+        return playerId;
     }
 
     /**
