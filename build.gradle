@@ -41,6 +41,15 @@ dependencies {
     compile 'org.spacehq:mcprotocollib:1.8-SNAPSHOT'
 }
 
+publishing {
+    publications {
+        shadow(MavenPublication) {
+            artifact sourcesJar
+            artifact shadowJar
+        }
+    }
+}
+
 bintray {
     user = ''
     key = ''
