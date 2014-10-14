@@ -1,4 +1,6 @@
 apply plugin: 'com.github.johnrengelman.shadow'
+apply plugin: 'com.jfrog.bintray'
+apply plugin: 'maven-publish'
 apply plugin: 'checkstyle'
 apply plugin: 'java'
 apply plugin: 'idea'
@@ -8,9 +10,8 @@ targetCompatibility = '1.7'
 
 group = 'ru.ensemplix.bot'
 description = 'Ensemplix Minecraft Bot'
-version = '1.0'
+version = '1.0.0'
 
-ext.buildNumber = project.hasProperty("buildNumber") ? buildNumber : 'DEV'
 compileJava.options.encoding = 'UTF-8'
 
 buildscript {
@@ -20,6 +21,7 @@ buildscript {
 
     dependencies {
         classpath 'com.github.jengelman.gradle.plugins:shadow:1.1.1'
+        classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:0.5'
     }
 }
 
@@ -27,13 +29,8 @@ checkstyle {
     configFile = file('checkstyle.xml')
 }
 
-shadowJar {
-    classifier = buildNumber
-}
-
 repositories {
     mavenCentral()
-    jcenter()
 
     maven {
         url 'http://repo.spacehq.org/content/repositories/snapshots/'
@@ -42,4 +39,20 @@ repositories {
 
 dependencies {
     compile 'org.spacehq:mcprotocollib:1.8-SNAPSHOT'
+}
+
+bintray {
+    user = ''
+    key = ''
+
+    pkg {
+        repo = 'ensemplix-maven'
+        userOrg = 'ensemplix'
+        name = 'eBot'
+        publications = ['shadow']
+        websiteUrl = 'https://github.com/ensemplix/eBot'
+        issueTrackerUrl = 'https://github.com/Ensemplix/eBot/issues'
+        vcsUrl = 'https://github.com/ensemplix/eBot.git'
+        publish = true
+    }
 }
